@@ -1,0 +1,42 @@
+Comment:Audio Book Narration Macro for Audacity
+Comment: (C) 2024 Brandon Parker
+Comment: Version 1.1
+Comment: Required Plug-Ins: 
+Comment:   1: ACX_Check (https://plugins.audacityteam.org/analyzers/analysis-plugins) for Peak, RMS, and Noise Floor checks
+Comment:   2: OpenVino (Noise Supression & Whisper) (https://plugins.audacityteam.org/ai-plugins/ai-plugins) for audio transcription
+Comment:   3: TDR Nova (https://www.tokyodawn.net/tdr-nova/free/) for Dynamic EQ Sibilance taming
+Comment: Recording Assumption: MXL Cr24 mic, ZoomH4 Interface, Treated room
+Comment: OpenVino will use the last settings used in Audacity. We suggest starting with:
+Comment:    OpenVinoNoiseSuppression - Advanced--> Attinuation Limit to 20-50
+Comment:    OpenVinoWhisperTranscription - Source Language = "english", and Whisper Model = "medium" (base will work, large may be overkill and take a long time)
+Save Project:
+SelectTracks:Mode="Set" Track="0" TrackCount="1"
+SetTrack:Color="Color3" Display="Waveform" Focused="1" Height="80" Mute="1" Name="Preserved Original" Selected="1" VZoom="Reset"
+SelTrackStartToEnd:
+Duplicate:
+MuteAllTracks:
+SelectTracks:Mode="Set" Track="0" TrackCount="1"
+SelTrackStartToEnd:
+Comment: Filter out inaudible low and high end energy...
+High-passFilter:FREQUENCY="100" ROLLOFF="dB6"
+Low-passFilter:FREQUENCY="22000" ROLLOFF="dB6"
+OpenvinoNoiseSuppression:Use_Preset="<Current Settings>"
+Comment: Normalize to target RMS...
+LoudnessNormalization:DualMono="1" LUFSLevel="-18" NormalizeTo="1" RMSLevel="-19" StereoIndependent="0"
+Comment: Apply standard vocal boosting curve, further cutting sub-audible low end, gentle boost on foundation and air/clarity, gentle reduction in muddy frequencies...
+TdrNova:Use_Preset="De-ess (split)"
+GraphicEq:f0="20" f1="20.798237" f10="29.579803" f100="1001.5735" f101="1041.5482" f102="1083.1183" f103="1126.3476" f104="1171.3022" f105="1218.051" f106="1266.6657" f107="1317.2207" f108="1369.7934" f109="1424.4644" f11="30.760388" f110="1481.3174" f111="1540.4395" f112="1601.9213" f113="1665.857" f114="1732.3444" f115="1801.4855" f116="1873.3861" f117="1948.1564" f118="2025.911" f119="2106.7688" f12="31.988092" f120="2190.8539" f121="2278.2949" f122="2369.2259" f123="2463.7861" f124="2562.1204" f125="2664.3793" f126="2770.7196" f127="2881.3042" f128="2996.3024" f129="3115.8904" f13="33.264796" f130="3240.2513" f131="3369.5758" f132="3504.0618" f133="3643.9154" f134="3789.3508" f135="3940.5908" f136="4097.8671" f137="4261.4206" f138="4431.5018" f139="4608.3712" f14="34.592456" f140="4792.2998" f141="4983.5694" f142="5182.4729" f143="5389.315" f144="5604.4126" f145="5828.095" f146="6060.7051" f147="6302.5991" f148="6554.1475" f149="6815.7357" f15="35.973105" f150="7087.7643" f151="7370.6501" f152="7664.8264" f153="7970.7439" f154="8288.871" f155="8619.6952" f156="8963.7232" f157="9321.482" f158="9693.5197" f159="10080.406" f16="37.408858" f160="10482.734" f161="10901.119" f162="11336.203" f163="11788.652" f164="12259.159" f165="12748.444" f166="13257.258" f167="13786.38" f168="14336.62" f169="14908.821" f17="38.901915" f170="15503.86" f171="16122.648" f172="16766.133" f173="17435.3" f174="18131.175" f175="18854.824" f176="19607.355" f177="20389.921" f178="21203.72" f179="22050" f18="40.454562" f19="42.069179" f2="21.628333" f20="43.748238" f21="45.494311" f22="47.310073" f23="49.198306" f24="51.161902" f25="53.203868" f26="55.327333" f27="57.535549" f28="59.8319" f29="62.219902" f3="22.49156" f30="64.703213" f31="67.285639" f32="69.971133" f33="72.763811" f34="75.667949" f35="78.687997" f36="81.828581" f37="85.094511" f38="88.490791" f39="92.022623" f4="23.38924" f40="95.695416" f41="99.514797" f42="103.48662" f43="107.61696" f44="111.91215" f45="116.37877" f46="121.02367" f47="125.85395" f48="130.87701" f49="136.10055" f5="24.322748" f50="141.53258" f51="147.18141" f52="153.05569" f53="159.16443" f54="165.51697" f55="172.12306" f56="178.99281" f57="186.13675" f58="193.56581" f59="201.29138" f6="25.293514" f60="209.32529" f61="217.67985" f62="226.36786" f63="235.40262" f64="244.79797" f65="254.56831" f66="264.72861" f67="275.29442" f68="286.28193" f69="297.70797" f7="26.303025" f70="309.59005" f71="321.94636" f72="334.79583" f73="348.15816" f74="362.05379" f75="376.50403" f76="391.53101" f77="407.15773" f78="423.40815" f79="440.30716" f8="27.352827" f80="457.88063" f81="476.1555" f82="495.15975" f83="514.92249" f84="535.474" f85="556.84576" f86="579.07051" f87="602.18228" f88="626.21649" f89="651.20995" f9="28.444529" f90="677.20095" f91="704.2293" f92="732.33639" f93="761.56529" f94="791.96078" f95="823.5694" f96="856.43958" f97="890.62167" f98="926.16803" f99="963.13312" FilterLength="8191" InterpolateLin="0" InterpolationMethod="B-spline" v0="-10.125" v1="-10.683533" v10="-5.9515419" v100="0" v101="0" v102="0" v103="0" v104="0" v105="0" v106="0" v107="0" v108="0" v109="0" v11="-5.3595165" v110="0" v111="0" v112="0" v113="0" v114="0" v115="0" v116="0" v117="0" v118="0" v119="0" v12="-4.8958615" v120="0" v121="0" v122="0" v123="0" v124="0" v125="0" v126="0" v127="0" v128="0" v129="0" v13="-4.4966186" v130="0" v131="0" v132="0" v133="0" v134="0" v135="0" v136="0" v137="0" v138="0" v139="-0.018084865" v14="-4.1445244" v140="-0.096016088" v141="-0.23546686" v142="-0.42915032" v143="-0.67969054" v144="-0.98758136" v145="-1.2996136" v146="-1.5543729" v147="-1.7517236" v148="-1.8881428" v149="-1.9708862" v15="-3.8290664" v150="-1.9999537" v151="-1.9753454" v152="-1.8970612" v153="-1.7651011" v154="-1.5657638" v155="-1.303859" v156="-0.98062423" v157="-0.66402955" v158="-0.40895441" v159="-0.21539882" v16="-3.4973474" v160="-0.083362783" v161="-0.012846294" v162="0" v163="0" v164="0" v165="0" v166="0" v167="0" v168="0" v169="0" v17="-3.142054" v170="0" v171="0" v172="0" v173="0" v174="0" v175="0" v176="0" v177="0" v178="0" v179="0" v18="-2.747118" v19="-2.284395" v2="-10.780669" v20="-1.7909122" v21="-1.2784643" v22="-0.83885543" v23="-0.49152588" v24="-0.24072242" v25="-0.080224387" v26="-0.0057522337" v27="0" v28="0" v29="0" v3="-10.421196" v30="0" v31="0" v32="0" v33="0.0053183834" v34="0.035633167" v35="0.092785877" v36="0.18076874" v37="0.30160389" v38="0.45319881" v39="0.62743382" v4="-9.8750753" v40="0.80281847" v41="0.97820311" v42="1.1535878" v43="1.3289724" v44="1.5043571" v45="1.6797417" v46="1.8551264" v47="2.0275797" v48="2.1861147" v49="2.3446496" v5="-9.2981947" v50="2.5031745" v51="2.6355664" v52="2.7176916" v53="2.7495501" v54="2.7269204" v55="2.6428718" v56="2.4973073" v57="2.3060711" v58="2.0840752" v59="1.8313195" v6="-8.6836142" v60="1.547804" v61="1.2335287" v62="0.88849368" v63="0.51269887" v64="0.10614428" v65="-0.32395222" v66="-0.77490253" v67="-1.2545281" v68="-1.7479107" v69="-2.1690359" v7="-8.0204254" v70="-2.5041351" v71="-2.749454" v72="-2.9100573" v73="-2.9901468" v74="-2.9897225" v75="-2.9087845" v76="-2.7473326" v77="-2.4962992" v78="-2.1452623" v79="-1.701946" v8="-7.3241368" v80="-1.1998279" v81="-0.77539496" v82="-0.44324129" v83="-0.20841715" v84="-0.062066581" v85="-0.0017418968" v86="0" v87="0" v88="0" v89="0" v9="-6.6097668" v90="0" v91="0" v92="0" v93="0" v94="0" v95="0" v96="0" v97="0" v98="0" v99="0"
+Comment: Targeted static cut in sibalance trouble frequencies (may need to adjust these for other voice actors)
+FilterCurve:f0="8594.8319" f1="9473.5367" f2="10352.242" FilterLength="8191" InterpolateLin="1" InterpolationMethod="B-spline" v0="-0.017192125" v1="-3.0343843" v2="-0.09169054"
+Comment: Limit peak to ACX required -3dB...
+LegacyLimiter:GAIN-L="0" GAIN-R="0" HOLD="10" MAKEUP="No" THRESH="-3" TYPE="SoftLimit"
+SetTrack:Color="Color2" Display="Multiview" Focused="1" Height="160" Mute="0" Name="Mastered by Macro" Selected="1" Solo="1" VZoom="Reset"
+SetProject:Rate="44100"
+Comment: Check our work and report...
+AcxCheck:Use_Preset="<Current Settings>"
+OpenvinoWhisperTranscription:Use_Preset="<Current Settings>"
+EditMetaData:
+Comment: Export the final...
+ExportMp3:
+Message:Text="Result MP3 in Documents\\Audacity\\"
+Save Project:
