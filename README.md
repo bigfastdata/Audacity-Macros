@@ -1,7 +1,7 @@
 # Audacity-Macros
 Audacity Macros for automated mastering (e.g., for ACX, Spotify, etc)
 
-##Loading Macros in Audacity
+## Loading Macros in Audacity
 
 1. Open Audacity (version 3.7 used to develop these macros)
 2. Navigate to "Tools" --> "Macro Manager" in the menu bar
