@@ -36,7 +36,4 @@ Comment: Check our work and report...
 AcxCheck:Use_Preset="<Current Settings>"
 OpenvinoWhisperTranscription:Use_Preset="<Current Settings>"
 EditMetaData:
-Comment: Export the final...
-ExportMp3:
-Message:Text="Result MP3 in Documents\\Audacity\\"
 Save Project:

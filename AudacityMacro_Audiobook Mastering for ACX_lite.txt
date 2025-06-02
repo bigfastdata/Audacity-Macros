@@ -27,6 +27,3 @@ Comment: Check our work and report...
 Message:Text="RMS should be between -17 and -23."
 Message:Text="While this version of the Macro does not check Peak RMS, the limiter should have done its job. However, you should ensure the noise floor is between -60 and -90."
 MeasureRms:Use_Preset="<Current Settings>"
-Comment: Export the final...
-ExportMp3:
-Message:Text="Result MP3 in Documents\\Audacity\\"

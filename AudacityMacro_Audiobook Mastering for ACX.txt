@@ -33,6 +33,3 @@ SetTrack:Color="Color2" Display="Multiview" Focused="1" Height="160" Mute="0" Na
 Comment: Check our work and report...
 AcxCheck:Use_Preset="<Current Settings>"
 OpenvinoWhisperTranscription:Use_Preset="<Current Settings>"
-Comment: Export the final...
-ExportMp3:
-Message:Text="Result MP3 in Documents\\Audacity\\"
